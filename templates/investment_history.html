@@ -1,0 +1,126 @@
+{% extends 'dashboardbase.html' %}
+{% load static %}
+
+{% block title %}
+<title>Mining history | {{company.name}}</title>
+{% endblock %}
+
+{% block style %}
+<style>
+.pagination-container {
+    width: 100%;
+    margin: 30px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+</style>
+{% endblock %}
+
+{% block pagetitle %}
+<div class="row">
+    <div class="col-md-12 m-b-30">
+        <!-- begin page title -->
+        <div class="d-block d-lg-flex flex-nowrap align-items-center">
+            <div class="page-title mr-4 pr-4 border-right">
+                <h1>Mining History</h1>
+            </div>
+            <div class="breadcrumb-bar align-items-center">
+                <nav>
+                    <ol class="breadcrumb p-0 m-b-0">
+                        <li class="breadcrumb-item">
+                            <a href="#"><i class="ti ti-home"></i></a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            History
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <!-- end page title -->
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="col-12">
+    <div class="card card-statistics clients-contant">
+        <div class="card-header">
+            <h3><center>MINING HISTORY</center></h3>
+        </div>
+        <div class="card-body py-0 table-responsive">
+            <table class="table clients-contant-table mb-0">
+                <thead>
+                    <tr>
+                        <th scope="col">DATE</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">PACKAGE</th>
+                        <th scope="col">AMOUNT</th>
+                        <th scope="col">METHOD</th>
+                        <th scope="col">PROFIT/DAY</th>
+                        <th scope="col">TOTAL PROFIT</th>
+                        <th scope="col">CURRENT RETURNS</th>
+                        <th scope="col">STATUS</th>
+                        <th scope="col">ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for investment in investments %}
+                    <tr>
+                        <td>{{investment.date}}</td>
+                        <td>{{investment.investment_id}}</td>
+                        <td>{{investment.package}}</td>
+                        <td>${{investment.amount}}</td>
+                        <td>{{investment.payment_method}}</td>
+                        <td>${{investment.daily_profit}}</td>
+                        <td>${{investment.total_profit}}</td>
+                        <td>${{investment.returns}}</td>
+                        {% if investment.status == 'pending' %}
+                        <td class="text-warning">{{investment.status}}</td>
+                        <td><a href="{% url 'mining:investment_detail' investment.investment_id %}" class="btn btn-icon btn-inverse-warning"><i class="ti ti-eye"></i></a></td>
+                        {% elif investment.status == 'approved' %}
+                        <td class="text-info">{{investment.status}}</td>
+                        <td><a href="{% url 'mining:investment_detail' investment.investment_id %}" class="btn btn-icon btn-inverse-info"><i class="ti ti-eye"></i></a></td>
+                        {% elif investment.status == 'completed' %}
+                        <td class="text-success">{{investment.status}}</td>
+                        <td><a href="{% url 'mining:investment_detail' investment.investment_id %}" class="btn btn-icon btn-inverse-success"><i class="ti ti-eye"></i></a></td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            {% if investments %}
+            <div class="pagination-container">
+                <div class="pagination-display">
+                    <div class="dataTables_info" id="datatable_info" role="status" aria-live="polite">Page <b>{{ investments.number }}</b> of <b>{{ investments.paginator.num_pages }}</b></div>
+                </div>
+                <div class="pagination-control">
+                    <div class="dataTables_paginate paging_simple_numbers" id="datatable_paginate">
+                        <ul class="pagination">
+                            {% if investments.has_previous %}
+                            <li class="paginate_button page-item previous" id="datatable_previous"><a href="?page={{ investments.previous_page_number }}" aria-controls="datatable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
+                            {% else %}
+                            <li class="paginate_button page-item previous" id="datatable_previous"><a href="javascript:void(0)" aria-controls="datatable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
+                            {% endif %}
+
+                            {% for investment in page_list %}
+                            <li {% if investments.number == investment %}class="paginate_button page-item active"{% else %}class="paginate_button page-item"{% endif %}><a href="?page={{ investment }}" aria-controls="datatable" data-dt-idx="1" tabindex="0" class="page-link">{{ investment }}</a></li>
+                            {% endfor %}
+
+                            {% if investments.has_next %}
+                            <li class="paginate_button page-item next" id="datatable_next"><a href="?page={{ investments.next_page_number }}" aria-controls="datatable" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li>
+                            {% else %}
+                            <li class="paginate_button page-item next" id="datatable_next"><a href="javascript:void(0)" aria-controls="datatable" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

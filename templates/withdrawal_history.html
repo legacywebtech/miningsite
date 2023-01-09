@@ -1,0 +1,122 @@
+{% extends 'dashboardbase.html' %}
+{% load static % }
+
+{% block title %}
+<title>Withdraw history | {{company.name}}</title>
+{% endblock %}
+
+{% block style %}
+<style>
+.pagination-container {
+    width: 100%;
+    margin: 30px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+</style>
+{% endblock %}
+
+{% block pagetitle %}
+<div class="row">
+    <div class="col-md-12 m-b-30">
+        <!-- begin page title -->
+        <div class="d-block d-lg-flex flex-nowrap align-items-center">
+            <div class="page-title mr-4 pr-4 border-right">
+                <h1>Withdrawal History</h1>
+            </div>
+            <div class="breadcrumb-bar align-items-center">
+                <nav>
+                    <ol class="breadcrumb p-0 m-b-0">
+                        <li class="breadcrumb-item">
+                            <a href="#"><i class="ti ti-home"></i></a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            History
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <!-- end page title -->
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="col-12">
+    <div class="card card-statistics clients-contant">
+        <div class="card-header">
+            <h3><center>WITHDRAWAL HISTORY</center></h3>
+        </div>
+        <div class="card-body py-0 table-responsive">
+            <table class="table clients-contant-table mb-0">
+                <thead>
+                    <tr>
+                        <th scope="col">DATE</th>
+                        <th scope="col">METHOD</th>
+                        <th scope="col">AMOUNT</th>
+                        <th scope="col">PAYMENT ADDRESS</th>
+                        <th scope="col">NETWORK</th>
+                        <th scope="col">STATUS</th>
+                        <th scope="col">ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for withdraw in withdrawals %}
+                    <tr>
+                        <td>{{withdraw.date}}</td>
+                        <td>{{withdraw.payment_method}}</td>
+                        <td>${{withdraw.amount}}</td>
+                        <td>{{withdraw.payment_address}}</td>
+                        <td>{{withdraw.network}}</td>
+                        {% if withdraw.status == 'pending' %}
+                        <td class="text-warning">{{withdraw.status}}</td>
+                        <td><a href="javascript:void(0);" class="btn btn-icon btn-inverse-warning"><i class="ti ti-eye"></i></a></td>
+                        {% elif withdraw.status == 'approved' %}
+                        <td class="text-success">{{withdraw.status}}</td>
+                        <td><a href="javascript:void(0);" class="btn btn-icon btn-inverse-success"><i class="ti ti-eye"></i></a></td>
+                        {% else %}
+                        <td class="text-danger">{{withdraw.status}}</td>
+                        <td><a href="javascript:void(0);" class="btn btn-icon btn-inverse-danger"><i class="ti ti-eye"></i></a></td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            {% if withdrawals %}
+            <div class="pagination-container">
+                <div class="pagination-display">
+                    <div class="dataTables_info" id="datatable_info" role="status" aria-live="polite">Page <b>{{ withdrawals.number }}</b> of <b>{{ withdrawals.paginator.num_pages }}</b></div>
+                </div>
+                <div class="pagination-control">
+                    <div class="dataTables_paginate paging_simple_numbers" id="datatable_paginate">
+                        <ul class="pagination">
+                            {% if withdrawals.has_previous %}
+                            <li class="paginate_button page-item previous" id="datatable_previous"><a href="?page={{ withdrawals.previous_page_number }}" aria-controls="datatable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
+                            {% else %}
+                            <li class="paginate_button page-item previous" id="datatable_previous"><a href="javascript:void(0)" aria-controls="datatable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
+                            {% endif %}
+
+                            {% for withdrawal in page_list %}
+                            <li {% if withdrawals.number == withdrawal %}class="paginate_button page-item active"{% else %}class="paginate_button page-item"{% endif %}><a href="?page={{ withdrawal }}" aria-controls="datatable" data-dt-idx="1" tabindex="0" class="page-link">{{ withdrawal }}</a></li>
+                            {% endfor %}
+                            
+                            {% if withdrawals.has_next %}
+                            <li class="paginate_button page-item next" id="datatable_next"><a href="?page={{ withdrawals.next_page_number }}" aria-controls="datatable" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li>
+                            {% else %}
+                            <li class="paginate_button page-item next" id="datatable_next"><a href="javascript:void(0)" aria-controls="datatable" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            
+        </div>
+
+    </div>
+</div>
+{% endblock %}

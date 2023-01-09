@@ -1,0 +1,121 @@
+{% extends 'dashboardbase.html' %}
+{% load static % }
+
+{% block style %}
+<style>
+    .withdraw-submit {
+        width: 100%;
+    }
+</style>
+{% endblock %}
+
+{% block title %}
+<title>Withdraw assets | {{company.name}}</title>
+{% endblock %}
+
+{% block pagetitle %}
+<div class="row">
+    <div class="col-md-12 m-b-30">
+        <!-- begin page title -->
+        <div class="d-block d-lg-flex flex-nowrap align-items-center">
+            <div class="page-title mr-4 pr-4 border-right">
+                <h1>Withdrawal Assets</h1>
+            </div>
+            <div class="breadcrumb-bar align-items-center">
+                <nav>
+                    <ol class="breadcrumb p-0 m-b-0">
+                        <li class="breadcrumb-item">
+                            <a href="#"><i class="ti ti-home"></i></a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            Withdraw
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <!-- end page title -->
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<!-- begin row -->
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card card-statistics">
+            <div class="card-header">
+                <div class="card-heading">
+                    <h4 class="card-title">Withraw assets</h4>
+                </div>
+                {% for message in messages %}
+                <p {% if message.tags %}class="{{ message.tags }}"{% endif %}>{{message}}</p>
+                {% endfor %}
+            </div>
+            <div class="card-body">
+                <form method="post" autocomplete="off">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="method">Payment Method</label>
+                        <select class="js-basic-single form-control" id="method" name="method">
+                            <optgroup label="PAYMENT">
+                                <option value="bitcoin">BITCOIN</option>
+                                <option value="ethereum">ETHEREUM</option>
+                                <option value="binance">BINANCE</option>
+                                <option value="litecoin">LITECOIN</option>
+                                <option value="bitcoin-cash">BITCOIN CASH</option>
+                                <option value="dash">DASH</option>
+                                <option value="usdt">USDT</option>
+                                <option value="busd">BUSD</option>
+                                <option value="xrp">XRP</option>
+                                <option value="tron">TRON</option>
+                                <option value="dogecoin">DOGE COIN</option>
+                                <option value="solana">SOLANA</option>
+                                <option value="cardano">CARDANO (ADA)</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="amount">Amount($)</label>
+                        <input type="text" maxlength="10" onkeypress="return onlyNumberKey(event)" id="amount" name="amount" class="form-control autonumber" value="">
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Payment Address</label>
+                        <input type="text" maxlength="150" class="form-control" id="address" name="address">
+                    </div>
+                    <div class="form-group">
+                        <label for="network">Network (optional)</label>
+                        <select class="js-basic-single form-control" id="network" name="network">
+                            <optgroup label="NETWORK">
+                                <option value="" default>CHOOSE NETWORK</option>
+                                <option value="bitcoin">BITCOIN</option>
+                                <option value="erc20">ERC20</option>
+                                <option value="trc20">TRC20</option>
+                                <option value="bep20">BEP20</option>
+                                <option value="sol">SOLANA(SOL)</option>
+                                <option value="bep2">BEP2</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary withdraw-submit" name="withdraw-submit">Continue</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block script %}
+<script>
+    // This functions only allows input fields to accept numbers
+    function onlyNumberKey(evt) {
+        // Only ASCII character in that range allowed
+        var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+        if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+        return false; 
+        return true;
+        // use  onkeypress="return onlyNumberKey(event)" on the input field
+    }
+</script>
+{% endblock %}

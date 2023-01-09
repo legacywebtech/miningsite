@@ -1,0 +1,1124 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="en">
+	
+<!-- Mirrored from rockstheme.com/rocks/aievari-live/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 30 Aug 2020 21:54:03 GMT -->
+<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>Home | {{company.name}}</title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<!-- favicon -->		
+		<link rel="shortcut icon" type="image/x-icon" href="{% static 'img/logo/favicon.ico' %}">
+
+		<!-- all css here -->
+
+		<!-- bootstrap v3.3.6 css -->
+		<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+		<!-- owl.carousel css -->
+		<link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}">
+		<link rel="stylesheet" href="{% static 'css/owl.transitions.css' %}">
+       <!-- Animate css -->
+        <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+        <!-- meanmenu css -->
+        <link rel="stylesheet" href="{% static 'css/meanmenu.min.css' %}">
+		<!-- font-awesome css -->
+		<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+		<link rel="stylesheet" href="{% static 'css/themify-icons.css' %}">
+		<link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+		<!-- magnific css -->
+        <link rel="stylesheet" href="{% static 'css/magnific.min.css' %}">
+		<!-- style css -->
+		<link rel="stylesheet" href="{% static 'css/style.css' %}">
+		<!-- responsive css -->
+		<link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+
+		<!-- modernizr css -->
+		<script src="{% static 'js/vendor/modernizr-2.8.3.min.js' %}"></script>
+	</head>
+		<body>
+
+		<!--[if lt IE 8]>
+			<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+		<![endif]-->
+
+        <!-- <div id="preloader"></div> -->
+        <header class="header-one">
+            <!-- Start top bar -->
+            <div class="topbar-area fix hidden-xs">
+                <div class="container">
+                    <div class="row">
+                       <div class="col-md-6 col-sm-6">
+                           <div class="topbar-left">
+                                <ul>
+                                    <li><a href="#"><i class="fa fa-envelope"></i> {{company.email}}</a></li>
+                                    <li><a href="#"><i class="fa fa-phone"></i> {{company.phone}}</a></li>
+                                </ul>
+							</div>
+                        </div>
+                        <div class=" col-md-6 col-sm-6">
+                            <div class="topbar-right">
+                                <div class="top-social">
+                                    <ul>
+                                        <li><a href="#"><i class="fa fa-skype"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-google"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    </ul> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End top bar -->
+            <!-- header-area start -->
+            <div id="sticker" class="header-area hidden-xs">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="row">
+                                <!-- logo start -->
+                                <div class="col-md-3 col-sm-3">
+                                    <div class="logo">
+                                        <!-- Brand -->
+                                        <a class="navbar-brand page-scroll white-logo" href="/">
+                                            <img src="{% static 'img/logo/logo3.png' %}" alt="logo">
+                                        </a>
+                                        <a class="navbar-brand page-scroll black-logo" href="/">
+                                            <img src="{% static 'img/logo/logo.png' %}" alt="logo">
+                                        </a>
+                                    </div>
+                                    <!-- logo end -->
+                                </div>
+                                <div class="col-md-9 col-sm-9">
+                                    <div class="header-right-link">
+                                        <!-- search option end -->
+                                        <a class="s-menu" href="{% url 'mining:login' %}">Login</a>
+                                    </div>
+                                    <!-- mainmenu start -->
+                                    <nav class="navbar navbar-default">
+                                        <div class="collapse navbar-collapse" id="navbar-example">
+                                            <div class="main-menu">
+                                                <ul class="nav navbar-nav navbar-right">
+                                                    <li><a class="pages" href="/">Home</a></li>
+                                                    <li><a href="{% url 'mining:about' %}">About us</a></li>
+                                                    <li><a href="{% url 'mining:plans' %}">Investment</a></li>
+                                                    <li><a class="pages" href="#">Pages</a>
+                                                        <ul class="sub-menu">
+                                                            <li><a href="{% url 'mining:team' %}">team</a></li>
+                                                            <li><a href="{% url 'mining:faq' %}">FAQ</a></li>
+                                                            <li><a href="{% url 'mining:reviews' %}">Reviews</a></li>
+                                                            <li><a href="{% url 'mining:login' %}">Login</a></li>
+                                                            <li><a href="{% url 'mining:register' %}">Register</a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li><a href="{% url 'mining:contact' %}">contacts</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </nav>
+                                    <!-- mainmenu end -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- header-area end -->
+            <!-- mobile-menu-area start -->
+            <div class="mobile-menu-area hidden-lg hidden-md hidden-sm">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="mobile-menu">
+                                <div class="logo">
+                                    <a href="/"><img src="{% static 'img/logo/logo.png' %}" alt="" /></a>
+                                </div>
+                                <nav id="dropdown">
+                                    <ul>
+                                        <li><a class="pages" href="/">Home</a></li>
+                                        <li><a href="{% url 'mining:about' %}">About us</a></li>
+                                        <li><a href="{% url 'mining:plans' %}">Investment</a></li>
+                                        <li><a class="pages" href="#">Pages</a>
+                                            <ul class="sub-menu">
+                                                <li><a href="{% url 'mining:team' %}">team</a></li>
+                                                <li><a href="{% url 'mining:faq' %}">FAQ</a></li>
+                                                <li><a href="{% url 'mining:reviews' %}">Reviews</a></li>
+                                                <li><a href="{% url 'mining:login' %}">Login</a></li>
+                                                <li><a href="{% url 'mining:register' %}">Register</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="{% url 'mining:contact' %}">contacts</a></li>
+                                    </ul>
+                                </nav>
+                            </div>					
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- mobile-menu-area end -->		
+        </header>
+        <!-- header end -->
+        <!-- Start Intro Area -->
+		<div class="slide-area fix" data-stellar-background-ratio="0.6">
+            <div class="display-table">
+                <div class="display-table-cell">
+					<div class="container">
+						<div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <!-- Start Slider content -->
+                                <div class="slide-content text-center">
+                                    <h2 class="title2">Best secure investment plan</h2>
+                                    <div class="layer-1-3">
+                                        <a href="#" class="ready-btn left-btn" >Get started</a>
+                                        <div class="video-content">
+                                            <a href="https://www.youtube.com/watch?v=O33uuBh6nXA" class="video-play vid-zone">
+                                                <i class="fa fa-play"></i>
+                                                <span>watch video</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Slider content -->
+						    </div>
+						</div>
+					</div>
+				</div>
+            </div>
+		</div>
+		<!-- End Intro Area -->
+        <!-- Start Count area -->
+        <div class="counter-area fix area-padding-2">
+            <div class="container">
+                <!-- Start counter Area -->
+                 <div class="row">
+                    <div class="fun-content">
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <!-- fun_text  -->
+                            <div class="fun_text">
+                                <span class="counter-icon"><i class="flaticon-035-savings"></i></span>
+                                <span class="counter">$5974544</span>
+                                <h4>Total Deposited</h4>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <!-- fun_text  -->
+                            <div class="fun_text">
+                               <span class="counter-icon"><i class="flaticon-034-reward"></i></span>
+                                <span class="counter">2209</span>
+                                <h4>Total Members</h4>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <!-- fun_text  -->
+                            <div class="fun_text">
+                               <span class="counter-icon"><i class="flaticon-016-graph"></i></span>
+                                <span class="counter">$3974544</span>
+                                <h4>Total Payments</h4>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <!-- fun_text  -->
+                            <div class="fun_text">
+                              <span class="counter-icon"><i class="flaticon-043-world"></i></span>
+                                <span class="counter">80</span>
+                                <h4>World Country</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Count area -->
+        <!-- Start Invest area -->
+        <div class="invest-area bg-color area-padding-2">
+            <div class="container">
+                <div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<div class="section-headline text-center">
+                            <h3>The best investment plan</h3>
+                            <p>Help agencies to define their new business objectives and then create professional software.</p>
+						</div>
+					</div>
+				</div>
+                <div class="row">
+                    <div class="pricing-content">
+                        {% for package in packages %}
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="pri_table_list">
+                                <span class="base">{{package.package}}</span>
+                                <div class="top-price-inner">
+                                   <div class="rates">
+                                        <span class="prices">{{package.daily_profit_percentage}}%</span><span class="users">Daily</span>
+                                    </div>
+                                    <span class="per-day">{{package.duration_in_days}} days</span>
+                                </div>
+                                <ol class="pricing-text">
+                                    <li class="check">Minimum Amount : ${{package.minimum_amount}}</li>
+                                    <li class="check">Maximum Amount : ${{package.maximum_amount}}</li>
+                                    <li class="check">Referral Commission : {{package.referral_commission}}% </li>
+                                </ol>
+                                <div class="price-btn blue">
+                                    <a class="blue" href="{% url 'mining:login' %}">Deposit</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Invest area -->
+        <!-- Start Support-service Area -->
+        <div class="support-service-area fix area-padding-2">
+            <div class="container">
+                <div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<div class="section-headline text-center">
+                            <h3>Why choose investment plan</h3>
+                            <p>Help agencies to define their new business objectives and then create professional software.</p>
+						</div>
+					</div>
+				</div>
+                <div class="row">
+                    <div class="support-all">
+                        <!-- Start About -->
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="support-services wow ">
+                                <a class="support-images" href="#"><i class="flaticon-023-management"></i></a>
+                                <div class="support-content">
+                                    <h4>Expert management</h4>
+                                    <p>Replacing a  maintains the amount of lines. When replacing a selection. help agencies to define their new business objectives and then create</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Start About -->
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="support-services ">
+                                <a class="support-images" href="#"><i class="flaticon-036-security"></i></a>
+                                <div class="support-content">
+                                    <h4>Secure investment</h4>
+                                    <p>Replacing a  maintains the amount of lines. When replacing a selection. help agencies to define their new business objectives and then create</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Start services -->
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="support-services ">
+                                <a class="support-images" href="#"><i class="flaticon-003-approve"></i></a>
+                                <div class="support-content">
+                                    <h4>Registered company</h4>
+                                    <p>Replacing a  maintains the amount of lines. When replacing a selection. help agencies to define their new business objectives and then create</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Start services -->
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="support-services">
+                                <a class="support-images" href="#"><i class="flaticon-042-wallet"></i></a>
+                                <div class="support-content">
+                                    <h4>Instant withdrawal</h4>
+                                    <p>Replacing a  maintains the amount of lines. When replacing a selection. help agencies to define their new business objectives and then create</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Start services -->
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="support-services ">
+                                <a class="support-images" href="#"><i class="flaticon-032-report"></i></a>
+                                <div class="support-content">
+                                    <h4>Verified security</h4>
+                                    <p>Replacing a  maintains the amount of lines. When replacing a selection. help agencies to define their new business objectives and then create</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Start services -->
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="support-services">
+                                <a class="support-images" href="#"><i class="flaticon-024-megaphone"></i></a>
+                                <div class="support-content">
+                                    <h4>Live customer support</h4>
+                                    <p>Replacing a  maintains the amount of lines. When replacing a selection. help agencies to define their new business objectives and then create</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Support-service Area -->
+        <!-- Start Self-area -->
+        <div class="self-area area-padding">
+            <div class="container">
+                <div class="row">
+                    <!-- column end -->
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="self-content">
+							<h4>An investment multi-national firm is a invest money of one or more experts. Provides more profite, We help your satele to future life and then create the road. Grow Money speedly without any risk. </h4>
+                            <span class="talk-text">Alex ferneld, CEO</span>
+                        </div>
+                    </div>
+                    <!-- column end -->
+                </div>
+            </div>
+        </div>
+        <!-- End Self-area -->
+        <!-- Start Work proses Area -->
+        <div class="work-proses fix bg-color area-padding-2">
+			<div class="container">
+			    <div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<div class="section-headline text-center">
+                            <h3>Referral bonus level</h3>
+                            <p>Help agencies to define their new business objectives and then create professional software.</p>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<div class="row">
+							<div class="work-proses-inner text-center">
+							    <div class="col-md-4 col-sm-4 col-xs-12">
+                                    <div class="single-proses">
+                                        <div class="proses-content">
+                                            <div class="proses-icon point-blue">
+                                                <span class="point-view">01</span>
+                                                <a href="#"><i class="ti-briefcase"></i></a>
+                                            </div>
+                                            <div class="proses-text">
+                                                <h4>Level 01 instant 30% commission</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End column -->
+                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                    <div class="single-proses">
+                                        <div class="proses-content">
+                                            <div class="proses-icon point-orange">
+                                               <span class="point-view">02</span>
+                                                <a href="#"><i class="ti-layers"></i></a>
+                                            </div>
+                                            <div class="proses-text">
+                                                <h4>Level 02 instant 20% commission</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End column -->
+                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                    <div class="single-proses last-item">
+                                        <div class="proses-content">
+                                            <div class="proses-icon point-green">
+                                               <span class="point-view">03</span>
+                                                <a href="#"><i class="ti-bar-chart-alt"></i></a>
+                                            </div>
+                                            <div class="proses-text">
+                                                <h4>Level 03 instant 10% commission</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End column -->
+							</div>
+						</div>
+                    </div>
+				</div>
+			</div>
+		</div>
+        <!-- End Work proses Area -->
+        <!--Start payment-history area -->
+        <div class="payment-history-area bg-color fix area-padding-2">
+            <div class="container">
+               <div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<div class="section-headline text-center">
+                            <h3>Deposite and withdrawals history</h3>
+                            <p>Help agencies to define their new business objectives and then create professional software.</p>
+						</div>
+					</div>
+				</div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="deposite-content">
+                            <div class="diposite-box">
+                                <h4>Last deposits</h4>
+                                <span><i class="flaticon-005-savings"></i></span>
+                                <div class="deposite-table">
+                                    <table>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Date</th>
+                                            <th>Amount</th>
+                                            <th>Currency</th>
+                                        </tr>
+                                        {% for deposit in last_deposits %}
+                                        <tr>
+                                            <td>{{deposit.name}}</td>
+                                            <td>{{deposit.date|date:"M, d Y"}}</td>
+                                            <td>${{deposit.amount}}</td>
+                                            <td>{{deposit.currency}}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="deposite-content">
+                            <div class="diposite-box">
+                                <h4>Last withdrawals</h4>
+                                <span><i class="flaticon-042-wallet"></i></span>
+                                <div class="deposite-table">
+                                    <table>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Date</th>
+                                            <th>Amount</th>
+                                            <th>Currency</th>
+                                        </tr>
+                                        {% for withdraw in last_withdraws %}
+                                        <tr>
+                                            <td>{{withdraw.name}}</td>
+                                            <td>{{withdraw.date|date:"M, d Y"}}</td>
+                                            <td>${{withdraw.amount}}</td>
+                                            <td>{{withdraw.currency}}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End payment-history area -->
+        <!-- Start Banner Area -->
+        <div class="banner-area area-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="banner-all area-80 text-center">
+                            <div class="banner-content">
+                                <h3>Our investment plan world wide business relations for development</h3>
+                                <a class="banner-btn" href="#">Sign up now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Banner Area -->
+        <!-- Start Blog Area-->
+        {% comment %}
+        <div class="blog-area fix bg-color area-padding-2">
+            <div class="container">
+                <div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<div class="section-headline text-center">
+                            <h3>Global investment plan news</h3>
+							<p>Dummy text is also used to demonstrate the appearance of different typefaces and layouts</p>
+						</div>
+					</div>
+				</div>
+                <div class="row">
+                    <div class="blog-grid home-blog">
+                        <!-- Start single blog -->
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="single-blog">
+                               <div class="blog-image">
+									<a class="image-scale" href="#">
+										<img src="{% static 'img/blog/b1.jpg' %}" alt="">
+									</a>
+								</div>
+                                <div class="blog-content">
+                                   <div class="blog-meta">
+                                        <span class="admin-type">
+                                            <i class="fa fa-user"></i>
+                                            Admin
+                                        </span>
+                                        <span class="date-type">
+                                            <i class="fa fa-calendar"></i>
+                                            20 july, 2019
+                                        </span>
+                                        <span class="comments-type">
+                                            <i class="fa fa-comment-o"></i>
+                                            13
+                                        </span>
+                                    </div>
+                                    <a href="#">
+                                        <h4>Creative design clients response is better</h4>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End single blog -->
+                        <!-- Start single blog -->
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="single-blog">
+                                <div class="blog-content">
+                                   <div class="blog-meta">
+                                       <span class="admin-type">
+                                            <i class="fa fa-user"></i>
+                                            Admin
+                                        </span>
+                                        <span class="date-type">
+                                           <i class="fa fa-calendar"></i>
+                                            13 may, 2018
+                                        </span>
+                                        <span class="comments-type">
+                                            <i class="fa fa-comment-o"></i>
+                                            16
+                                        </span>
+                                    </div>
+                                    <a href="#">
+                                        <h4>Web development is a best work in future world</h4>
+                                    </a>
+                                </div>
+                                <div class="blog-image">
+									<a class="image-scale" href="#">
+										<img src="{% static 'img/blog/b2.jpg' %}" alt="">
+									</a>
+								</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="single-blog">
+                                <div class="blog-image">
+									<a class="image-scale" href="#">
+										<img src="{% static 'img/blog/b3.jpg' %}" alt="">
+									</a>
+								</div>
+                                <div class="blog-content">
+                                   <div class="blog-meta">
+                                        <span class="admin-type">
+                                            <i class="fa fa-user"></i>
+                                            Admin
+                                        </span>
+                                        <span class="date-type">
+                                           <i class="fa fa-calendar"></i>
+                                            24 april, 2019
+                                        </span>
+                                        <span class="comments-type">
+                                            <i class="fa fa-comment-o"></i>
+                                            07
+                                        </span>
+                                    </div>
+                                    <a href="#">
+                                        <h4>You can trust me and business with together</h4>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End single blog -->
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="single-blog">
+                                <div class="blog-content">
+                                    <div class="blog-meta">
+                                        <span class="admin-type">
+                                            <i class="fa fa-user"></i>
+                                            Admin
+                                        </span>
+                                        <span class="date-type">
+                                           <i class="fa fa-calendar"></i>
+                                            28 june, 2019
+                                        </span>
+                                        <span class="comments-type">
+                                            <i class="fa fa-comment-o"></i>
+                                            32
+                                        </span>
+                                    </div>
+                                    <a href="#">
+                                        <h4>business man want to be benifit any way</h4>
+                                    </a>
+                                </div>
+                                <div class="blog-image">
+									<a class="image-scale" href="#">
+										<img src="{% static 'img/blog/b4.jpg' %}" alt="">
+									</a>
+								</div> 
+                            </div>
+                        </div>
+                        <!-- End single blog -->
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="single-blog">
+                                <div class="blog-image">
+									<a class="image-scale" href="#">
+										<img src="{% static 'img/blog/b5.jpg' %}" alt="">
+									</a>
+								</div>
+                                <div class="blog-content">
+                                    <div class="blog-meta">
+                                        <span class="admin-type">
+                                            <i class="fa fa-user"></i>
+                                            Admin
+                                        </span>
+                                        <span class="date-type">
+                                           <i class="fa fa-calendar"></i>
+                                            28 june, 2019
+                                        </span>
+                                        <span class="comments-type">
+                                            <i class="fa fa-comment-o"></i>
+                                            32
+                                        </span>
+                                    </div>
+                                    <a href="#">
+                                        <h4>business man want to be benifit any way</h4>
+                                    </a>
+                                </div> 
+                            </div>
+                        </div>
+                        <!-- End single blog -->
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="single-blog">
+                                <div class="blog-content">
+                                    <div class="blog-meta">
+                                        <span class="admin-type">
+                                            <i class="fa fa-user"></i>
+                                            Admin
+                                        </span>
+                                        <span class="date-type">
+                                           <i class="fa fa-calendar"></i>
+                                            28 june, 2019
+                                        </span>
+                                        <span class="comments-type">
+                                            <i class="fa fa-comment-o"></i>
+                                            32
+                                        </span>
+                                    </div>
+                                    <a href="#">
+                                        <h4>business man want to be benifit any way</h4>
+                                    </a>
+                                </div>
+                                <div class="blog-image">
+									<a class="image-scale" href="#">
+										<img src="{% static 'img/blog/b6.jpg' %}" alt="">
+									</a>
+								</div>
+                            </div>
+                        </div>
+                        <!-- End single blog -->
+                    </div>
+                </div>
+                <!-- End row -->
+            </div>
+        </div>
+        {% endcomment %}
+        <!-- End Blog Area-->
+        <!-- Start reviews Area -->
+        <div class="reviews-area fix area-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="reviews-top">
+                        <div class="col-md-5 col-sm-5 col-xs-12">
+                            <div class="testimonial-inner">
+                                <div class="review-head">
+                                    <h3>Our customer say about our company work</h3>
+                                    <p>The phrasal sequence of the Lorem Ipsum text is now so widespread and commonplace that many DTP programmes can generate dummy. The phrasal sequence of the Lorem Ipsum text is now so widespread and commonplace that many DTP programmes can generate dummy</p>
+                                    <a class="reviews-btn" href="review.html">More reviews</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-7 col-sm-7 col-xs-12">
+                            <div class="reviews-content">
+                                <!-- start testimonial carousel -->
+                                <div class="testimonial-carousel item-indicator">
+                                    <div class="single-testi">
+                                        <div class="testi-text">
+                                            <div class="clients-text">
+                                                <div class="client-rating">
+                                                    <a href="#"><i class="ti-star"></i></a>
+                                                    <a href="#"><i class="ti-star"></i></a>
+                                                    <a href="#"><i class="ti-star"></i></a>
+                                                    <a href="#"><i class="ti-star"></i></a>
+                                                    <a href="#"><i class="ti-star"></i></a>
+                                                </div>
+                                                <p>When replacing a multi-lined selection of text, the generated dummy text maintains the amount of lines. When replacing a selection. help agencies.</p>
+                                            </div>
+                                            <div class="testi-img ">
+                                                <img src="{% static 'img/review/1.jpg' %}" alt="">
+                                                <div class="guest-details">
+                                                    <h4>Hamilton</h4>
+                                                    <span class="guest-rev">Clients - <a href="#">General customer</a></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End single item -->
+                                    <div class="single-testi">
+                                        <div class="testi-text">
+                                            <div class="clients-text">
+                                                <div class="client-rating">
+                                                    <a href="#"><i class="ti-star"></i></a>
+                                                    <a href="#"><i class="ti-star"></i></a>
+                                                    <a href="#"><i class="ti-star"></i></a>
+                                                    <a href="#"><i class="ti-star"></i></a>
+                                                    <a href="#"><i class="ti-star"></i></a>
+                                                </div>
+                                                <p>When replacing a multi-lined selection of text, the generated dummy text maintains the amount of lines. When replacing a selection. help agencies.</p>
+                                            </div>
+                                            <div class="testi-img ">
+                                                <img src="{% static 'img/review/2.jpg' %}" alt="">
+                                                <div class="guest-details">
+                                                    <h4>Angel lima</h4>
+                                                    <span class="guest-rev">Clients - <a href="#">General customer</a></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End single item -->
+                                    <div class="single-testi">
+                                        <div class="testi-text">
+                                            <div class="clients-text">
+                                                <div class="client-rating">
+                                                    <a href="#"><i class="ti-star"></i></a>
+                                                    <a href="#"><i class="ti-star"></i></a>
+                                                    <a href="#"><i class="ti-star"></i></a>
+                                                    <a href="#"><i class="ti-star"></i></a>
+                                                    <a href="#"><i class="ti-star"></i></a>
+                                                </div>
+                                                <p>When replacing a multi-lined selection of text, the generated dummy text maintains the amount of lines. When replacing a selection. help agencies.</p>
+                                            </div>
+                                            <div class="testi-img ">
+                                                <img src="{% static 'img/review/3.jpg' %}" alt="">
+                                                <div class="guest-details">
+                                                    <h4>Arthur Doil</h4>
+                                                    <span class="guest-rev">Clients - <a href="#">General customer</a></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End single item -->
+                                    <div class="single-testi">
+                                        <div class="testi-text">
+                                            <div class="clients-text">
+                                                <div class="client-rating">
+                                                    <a href="#"><i class="ti-star"></i></a>
+                                                    <a href="#"><i class="ti-star"></i></a>
+                                                    <a href="#"><i class="ti-star"></i></a>
+                                                    <a href="#"><i class="ti-star"></i></a>
+                                                    <a href="#"><i class="ti-star"></i></a>
+                                                </div>
+                                                <p>When replacing a multi-lined selection of text, the generated dummy text maintains the amount of lines. When replacing a selection. help agencies.</p>
+                                            </div>
+                                            <div class="testi-img ">
+                                                <img src="{% static 'img/review/4.jpg' %}" alt="">
+                                                <div class="guest-details">
+                                                    <h4>Gabriel Hank</h4>
+                                                    <span class="guest-rev">Clients - <a href="#">General customer</a></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End single item -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End reviews Area -->
+        <!-- Start FAQ area -->
+        <div class="faq-area bg-color area-padding">
+            <div class="container">
+               <div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<div class="section-headline text-center">
+                            <h3>Some important FAQ</h3>
+                            <p>Help agencies to define their new business objectives and then create professional software.</p>
+						</div>
+					</div>
+				</div>
+                <div class="row">
+                    <!-- Start Column Start -->
+                    <div class="col-md-7 col-sm-6 col-xs-12">
+                        <div class="company-faq">
+                            <div class="faq-full">
+								<div class="faq-details">
+									<div class="panel-group" id="accordion">
+										<!-- Panel Default -->
+										<div class="panel panel-default">
+											<div class="panel-heading">
+												<h4 class="check-title">
+													<a data-toggle="collapse" class="active" data-parent="#accordion" href="#check1">
+														<span class="acc-icons"></span>How to successful our mission and vision
+													</a>
+												</h4>
+											</div>
+											<div id="check1" class="panel-collapse collapse in">
+												<div class="panel-body">
+													<p>
+														When replacing a multi-lined selection of text, the generated dummy text maintains the amount of lines. When replacing a selection of text within a single line, the amount of words is roughly being maintained. 
+													</p>		
+												</div>
+											</div>
+										</div>
+										<!-- End Panel Default -->
+										<!-- Panel Default -->
+										<div class="panel panel-default">
+											<div class="panel-heading">
+												<h4 class="check-title">
+													<a data-toggle="collapse" data-parent="#accordion" href="#check2">
+														<span class="acc-icons"></span>Clients satisfaction make company Value.
+													</a>
+												</h4>
+											</div>
+											<div id="check2" class="panel-collapse collapse">
+												<div class="panel-body">
+													<p>
+														When replacing a multi-lined selection of text, the generated dummy text maintains the amount of lines. When replacing a selection of text within a single line, the amount of words is roughly being maintained. 
+													</p>										
+												</div>
+											</div>
+										</div>
+										<!-- End Panel Default -->
+										<!-- Panel Default -->
+										<div class="panel panel-default">
+											<div class="panel-heading">
+												<h4 class="check-title">
+													<a data-toggle="collapse" data-parent="#accordion" href="#check3">
+														<span class="acc-icons"></span>World class creative design and development firm. 
+													</a>
+												</h4>
+											</div>
+											<div id="check3" class="panel-collapse collapse ">
+												<div class="panel-body">
+													<p>
+														When replacing a multi-lined selection of text, the generated dummy text maintains the amount of lines. When replacing a selection of text within a single line, the amount of words is roughly being maintained. 
+													</p>	
+												</div>
+											</div>
+										</div>
+										<!-- End Panel Default -->	
+										<!-- Panel Default -->
+										<div class="panel panel-default">
+											<div class="panel-heading">
+												<h4 class="check-title">
+													<a data-toggle="collapse" data-parent="#accordion" href="#check4">
+														<span class="acc-icons"></span>We are the best online flatform 
+													</a>
+												</h4>
+											</div>
+											<div id="check4" class="panel-collapse collapse ">
+												<div class="panel-body">
+													<p>
+														When replacing a multi-lined selection of text, the generated dummy text maintains the amount of lines. When replacing a selection of text within a single line, the amount of words is roughly being maintained. 
+													</p>	
+												</div>
+											</div>
+										</div>
+										<!-- End Panel Default -->
+										<!-- Panel Default -->
+										<div class="panel panel-default">
+											<div class="panel-heading">
+												<h4 class="check-title">
+													<a data-toggle="collapse" data-parent="#accordion" href="#check5">
+														<span class="acc-icons"></span>Clients satisfaction make company Value.
+													</a>
+												</h4>
+											</div>
+											<div id="check5" class="panel-collapse collapse">
+												<div class="panel-body">
+													<p>
+														When replacing a multi-lined selection of text, the generated dummy text maintains the amount of lines. When replacing a selection of text within a single line, the amount of words is roughly being maintained. 
+													</p>										
+												</div>
+											</div>
+										</div>
+										<!-- End Panel Default -->										
+									</div>
+								</div>
+								<!-- End FAQ -->
+							</div>
+                        </div>
+                    </div>
+                    <!-- End Column -->
+                    <div class="col-md-5 col-sm-6 col-xs-12">
+                        <div class="faq-content">
+                        	<h4>Have any question?</h4>
+							<div class="faq-quote">
+								<div class="row">
+                                    {% for message in messages %}
+                                    <h6 style="margin-left: 20px;">{{message}}</h6>
+                                    {% endfor %}
+									<form id="contactForm" method="POST" class="contact-form" autocomplete="off">
+                                        {% csrf_token %}
+										<div class="col-md-12 col-sm-12 col-xs-12">
+											<input type="text" maxlength="50" id="name" class="form-control" placeholder="Name" required data-error="Please enter your name" name="name">
+											<div class="help-block with-errors"></div>
+											<input type="email" maxlength="50" class="email form-control" id="email" placeholder="Email" required data-error="Please enter your email" name="email">
+											<div class="help-block with-errors"></div>
+											<input type="text" maxlength="150" id="msg_subject" class="form-control" placeholder="Subject" required data-error="Please enter your message subject" name="subject">
+											<div class="help-block with-errors"></div>
+                                            <input type="hidden" maxlength="50" id="location" name="location">
+										</div>
+										<div class="col-md-12 col-sm-12 col-xs-12">
+											<textarea maxlength="3500" id="message" rows="7" placeholder="Message" class="form-control" required data-error="Write your message" name="message"></textarea>
+											<div class="help-block with-errors"></div>
+											<button type="submit" name="submit" id="submit" class="quote-btn">Submit</button>
+											<div id="msgSubmit" class="h3 text-center hidden"></div> 
+											<div class="clearfix"></div>
+										</div>   
+									</form>
+								</div>
+							</div>
+                        </div>
+                    </div>
+                    <!-- End Column -->
+                </div>
+            </div>
+        </div>
+        <!-- End FAQ area -->
+        <!-- Start Footer Area -->
+        <footer class="footer1">
+            <div class="footer-area">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-5 col-sm-5 col-xs-12">
+                            <div class="footer-content logo-footer">
+                                <div class="footer-head">
+                                    <div class="footer-logo">
+                                    	<a class="footer-black-logo" href="#"><img src="{% static 'img/logo/logo.png' %}" alt=""></a>
+                                    </div>
+                                    <p>
+                                        Are you looking for professional advice for your new business. Are you looking for professional advice for your new business. Are you looking for professional advice for your new business.
+                                    </p>
+                                    <div class="subs-feilds">
+                                        <div class="suscribe-input">
+                                            <input type="email" class="email form-control width-80" id="sus_email" placeholder="Type Email">
+                                            <button type="submit" id="sus_submit" class="add-btn">Subscribe</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end single footer -->
+                        <div class="col-md-4 col-sm-3 col-xs-12">
+                            <div class="footer-content">
+                                <div class="footer-head">
+                                    <h4>Services Link</h4>
+                                    <ul class="footer-list">
+                                        <li><a href="{% url 'mining:about' %}">About us</a></li>
+                                        <li><a href="{% url 'mining:plans' %}">Services </a></li>
+                                        <li><a href="#">Events</a></li>
+                                        <li><a href="#">Promotion</a></li>
+                                        <li><a href="#">Transition</a></li>
+                                        <li><a href="#">Social Media</a></li>
+                                    </ul>
+                                    <ul class="footer-list hidden-sm">
+										<li><a href="#">Customer Care</a></li>
+                                        <li><a href="#">Live chat</a></li>
+                                        <li><a href="#">Notification</a></li>
+                                        <li><a href="#">Privacy</a></li>
+                                        <li><a href="#">Terms & Condition</a></li>
+                                        <li><a href="{% url 'mining:contact' %}">Contact us </a></li>
+									</ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end single footer -->
+                        <div class="col-md-3 col-sm-4 col-xs-12">
+                            <div class="footer-content last-content">
+                                <div class="footer-head">
+                                    <h4>Information</h4> 
+                                    <div class="footer-contacts">
+                                        {% if company.phone %}
+										<p><span>Tel:</span> {{company.phone}}</p>
+                                        {% else %}
+                                        <p><span>Tel:</span> Exclusive to VIP members</p>
+                                        {% endif %}
+										<p><span>Email:</span> {{company.email}}</p>
+										<p><span>Location:</span> {{company.address}}</p>
+									</div> 
+                                    <div class="footer-icons">
+                                        <ul>
+                                            <li>
+                                                <a href="#">
+                                                    <i class="fa fa-facebook"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <i class="fa fa-twitter"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <i class="fa fa-google"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <i class="fa fa-pinterest"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <i class="fa fa-instagram"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-area-bottom">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="copyright">
+                                <p>
+                                    Copyright © 2020
+                                    <a href="#" style="text-transform: capitalize;">{{company.name}}</a> All Rights Reserved
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- End Footer area -->
+		
+		<!-- all js here -->
+
+		<!-- jquery latest version -->
+		<script src="{% static 'js/vendor/jquery-1.12.4.min.js' %}"></script>
+		<!-- bootstrap js -->
+		<script src="{% static 'js/bootstrap.min.js' %}"></script>
+		<!-- owl.carousel js -->
+		<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+		  <!-- stellar js -->
+        <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+		<!-- magnific js -->
+        <script src="{% static 'js/magnific.min.js' %}"></script>
+        <!-- wow js -->
+        <script src="{% static 'js/wow.min.js' %}"></script>
+        <!-- meanmenu js -->
+        <script src="{% static 'js/jquery.meanmenu.js' %}"></script>
+		<!-- Form validator js -->
+		<script src="{% static 'js/form-validator.min.js' %}"></script>
+		<!-- plugins js -->
+		<script src="{% static 'js/plugins.js' %}"></script>
+		<!-- main js -->
+		<script src="{% static 'js/main.js' %}"></script>
+        <!-- Script for getting user timezone/location -->
+        <script>
+            // Timezone settings
+            const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone; // e.g. "America/New_York"
+            console.log(timezone);
+            document.getElementById('location').value = timezone;
+        </script>
+	</body>
+
+<!-- Mirrored from rockstheme.com/rocks/aievari-live/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 30 Aug 2020 21:54:51 GMT -->
+</html>

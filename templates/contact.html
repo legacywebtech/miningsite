@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Contact | {{company.name}}</title>
+{% endblock %}
+
+{% block content %}
+<!-- Start breadcumb Area -->
+<div class="page-area">
+    <div class="breadcumb-overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcrumb text-center">
+                    <div class="section-headline white-headline">
+                        {% if messages %}
+                        {% for message in messages %}
+                        <h4 style="color: #fff;">{{message}}</h4>
+                        {% endfor %}
+                        {% else %}
+                        <h3>Contact us</h3>
+                        {% endif %} 
+                    </div>
+                    <ul class="breadcrumb-bg">
+                        <li class="home-bread">Home</li>
+                        <li>Contact us</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End breadcumb Area -->
+<!-- Start contact Area -->
+<div class="contact-area page-padding">
+    <div class="container">
+        <div class="row">
+            <div class="contact-inner">
+                <!-- Start contact icon column -->
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="contact-icon text-center">
+                        <div class="single-icon">
+                            <i class="fa fa-mobile"></i>
+                            <p>
+                                {% if company.phone %}
+                                Call : {{company.phone}}<br>
+                                {% else %}
+                                Call: Exclusive to VIP members<br>
+                                {% endif %}
+                                <span>Monday-Friday (10am-18pm)</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Start contact icon column -->
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="contact-icon text-center">
+                        <div class="single-icon">
+                            <i class="fa fa-envelope-o"></i>
+                            <p>
+                                Email : {{company.email}}<br>
+                                <span>{{company.site_domain}}</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Start contact icon column -->
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="contact-icon text-center">
+                        <div class="single-icon">
+                            <i class="fa fa-map-marker"></i>
+                            <p>
+                                Location : {{company.address}}<br>
+                                <span></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <!-- Start Map -->
+                <div class="map-area">
+                    <!-- <div id="googleMap" style="width:100%;height:380px;"></div> -->
+                </div>
+                <!-- End Map -->
+            </div>
+            <!-- Start Left contact -->
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="contact-form">
+                    <div class="row">
+                        <form id="contactForm" method="POST" class="contact-form" autocomplete="off">
+                            {% csrf_token %}
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" maxlength="50" id="name" class="form-control" placeholder="Name" required data-error="Please enter your name" name="name">
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="email" maxlength="50" class="email form-control" id="email" placeholder="Email" required data-error="Please enter your email" name="email">
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="hidden" maxlength="50" class="form-control" id="location" name="location">
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <input type="text" maxlength="150" id="msg_subject" class="form-control" placeholder="Subject" required data-error="Please enter your message subject" name="subject">
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <textarea id="message" maxlength="3500" rows="7" placeholder="Message" class="form-control" required data-error="Write your message" name="message"></textarea>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                            {% for message in messages %}
+                            <h6>{{message}}</h6>
+                            {% endfor %}
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                                <button type="submit" id="submit" class="add-btn contact-btn" name="message-submit">Send Message</button>
+                                <div id="msgSubmit" class="h3 text-center hidden"></div> 
+                                <div class="clearfix"></div>
+                            </div>   
+                        </form>  
+                    </div>
+                </div>
+            </div>
+            <!-- End Left contact -->
+        </div>
+    </div>
+</div>
+<!-- End Contact Area -->
+{% endblock %}
+
+{% block script %}
+    <!-- Script for getting user timezone/location -->
+    <script>
+        // Timezone settings
+        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone; // e.g. "America/New_York"
+        console.log(timezone);
+        document.getElementById('location').value = timezone;
+    </script>
+{% endblock %}

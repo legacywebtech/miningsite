@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Investment | {{company.name}}</title>
+{% endblock %}
+
+{% block content %}
+<!-- Start breadcumb Area -->
+<div class="page-area">
+    <div class="breadcumb-overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcrumb text-center">
+                    <div class="section-headline white-headline">
+                        <h3>Investment plans</h3>
+                    </div>
+                    <ul class="breadcrumb-bg">
+                        <li class="home-bread">Home</li>
+                        <li>Investment plan</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End breadcumb Area -->
+<!-- Start Invest area -->
+<div class="invest-area bg-color page-padding-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="section-headline text-center">
+                    <h3>The best investment plans</h3>
+                    <p>Help agencies to define their new business objectives and then create professional software.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="pricing-content">
+                {% for package in packages %}
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="pri_table_list">
+                        <span class="base">{{package.package}}</span>
+                        <div class="top-price-inner">
+                           <div class="rates">
+                                <span class="prices">{{package.daily_profit_percentage}}%</span><span class="users">Daily</span>
+                            </div>
+                            <span class="per-day">{{package.duration_in_days}} days</span>
+                        </div>
+                        <ol class="pricing-text">
+                            <li class="check">Minimum Amount : ${{package.minimum_amount}}</li>
+                            <li class="check">Maximum Amount : ${{package.maximum_amount}}</li>
+                            <li class="check">Referral Commission : {{package.referral_commission}}% </li>
+                        </ol>
+                        <div class="price-btn blue">
+                            <a class="blue" href="{% url 'mining:login' %}">Deposit</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Invest area -->
+<!--Start payment-history area -->
+<div class="payment-history-area bg-color fix area-padding-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="section-headline text-center">
+                    <h3>Deposit and withdrawals history</h3>
+                    <p>Help agencies to define their new business objectives and then create professional software.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="deposite-content">
+                    <div class="diposite-box">
+                        <h4>Last deposits</h4>
+                        <span><i class="flaticon-005-savings"></i></span>
+                        <div class="deposite-table">
+                            <table>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Date</th>
+                                    <th>Amount</th>
+                                    <th>Currency</th>
+                                </tr>
+                                {% for deposit in last_deposits %}
+                                <tr>
+                                    <td>{{deposit.name}}</td>
+                                    <td>{{deposit.date|date:"M, d Y"}}</td>
+                                    <td>${{deposit.amount}}</td>
+                                    <td>{{deposit.currency}}</td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                    <div class="diposite-box">
+                        <h4>Last withdrawals</h4>
+                        <span><i class="flaticon-042-wallet"></i></span>
+                        <div class="deposite-table">
+                            <table>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Date</th>
+                                    <th>Amount</th>
+                                    <th>Currency</th>
+                                </tr>
+                                {% for withdraw in last_withdraws %}
+                                <tr>
+                                    <td>{{withdraw.name}}</td>
+                                    <td>{{withdraw.date|date:"M, d Y"}}</td>
+                                    <td>${{withdraw.amount}}</td>
+                                    <td>{{withdraw.currency}}</td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End payment-history area -->
+{% endblock %}

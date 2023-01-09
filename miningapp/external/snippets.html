@@ -1,0 +1,384 @@
+<!--     REGISTER INVESTMENT PAGE SNIPPETS            -->
+
+<!-- Script for getting user location from longitude and latitude -->
+<script>
+    // API is from opencage.com
+    let handleResults = (position) => {
+        let {latitude, longitude} = position.coords;
+
+        fetch(`https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=870f0570505b4d4498b7b1d220992532`)
+        .then(response => response.json())
+        .then((data) => {
+            let country =  data.results[0].components.country,
+            state = data.results[0].components.state,
+            userLocation = `${state}`;
+            console.log(userLocation);
+            document.getElementById('location').value = userLocation;
+            localStorage.setItem('location', userLocation);
+        })
+
+    }
+
+    let userlocation = localStorage.getItem('location');
+
+    if (userlocation == null) {
+        // if there is no location in local storage then fetch and set one
+        navigator.geolocation.getCurrentPosition(handleResults, console.log)
+    } else {
+        // else just set our input value
+        console.log(userlocation);
+        document.getElementById('location').value = userlocation;
+    }
+    
+</script>
+
+<!-- Script for getting user timezone -->
+<script>
+    // Timezone settings
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone; // e.g. "America/New_York"
+    document.getElementById('timezone').value = timezone;
+    // console.log(document.getElementById('timezone').value);
+</script>
+
+
+
+
+<!--     CREATE INVESTMENT PAGE SNIPPETS            -->
+
+<script>
+    let investForms = document.getElementsByClassName('investment-form'),
+    amounts = document.getElementsByClassName('amount');
+
+    console.log("Number of forms: ", investForms.length);
+
+    // Code to calculate and display our profit and total returns on investment
+    for (let i=0; i < amounts.length; i++) {
+        amounts[i].addEventListener('keyup', function(){
+            let amount = parseInt(amounts[i].value),
+            packagePercentage = parseFloat(investForms[i].querySelector('.package-percentage').value),
+            packageDuration = parseInt(investForms[i].querySelector('.package-duration').value);
+
+            let dailyReturn = (packagePercentage/100) * amount,
+            totalReturn = dailyReturn * packageDuration;
+
+            console.log(dailyReturn, totalReturn);
+
+            if (amount == NaN) {
+                dailyReturn = 0;
+                totalReturn = 0;
+            }
+
+            investForms[i].querySelector('.daily-profit').value = dailyReturn;
+            investForms[i].querySelector('.total-profit').value = totalReturn;
+
+        })
+    }
+
+    // Code to validate our forms and place investment
+    for (let i=0; i < investForms.length; i++) {
+        investForms[i].addEventListener('submit', function(e){
+            e.preventDefault();
+    
+            let amount = parseInt(this.querySelector('.amount').value),
+            payment = this.querySelector('.payment').value,
+            package = parseInt(this.querySelector('.package').value),
+            // Package information
+            packagePercentage = parseFloat(this.querySelector('.package-percentage').value),
+            packageDuration = parseInt(this.querySelector('.package-duration').value),
+            packageMin = parseInt(this.querySelector('.package-min').value),
+            packageMax = parseInt(this.querySelector('.package-max').value),
+            // Messages
+            message = this.querySelector('.message'),
+            // Submit button
+            investBtn = this.querySelector('.invest-button'),
+            // Empty form data
+            investmentData;
+
+            console.log(investBtn.childEelment);
+
+            if (amount < packageMin) {
+                // If amount is lesser than package minimum amount
+                message.innerText = `Minimum amount is ${packageMin}`;
+            } else if (amount > packageMax) {
+                // If amount is greater than package minimum amount
+                message.innerText = `Maximum amount is ${packageMax}`;
+            } else if (isNaN(amount)) {
+                // If amount is not a number
+                message.innerText = `Please enter required fields`;
+            } else if (payment == '' || payment == ' ') {
+                // If payment method is not picked
+                message.innerText = `Payment method is required`;
+            } else {
+                // If form data is validated
+                investmentData  = {
+                    'id': generateInvestmentID(),
+                    'package': package,
+                    'payment': payment,
+                    'amount': amount
+                }
+                processInvestment(investmentData, message, investBtn);
+            }
+
+        });
+    }
+
+    // AJAX function to send investment details to backend
+    function processInvestment(data, message, investButton) {
+        var url = '/process_investment/'
+
+        // Loading animation
+        console.log('About to send data...')
+        let btnText = investButton.querySelector('.btn-text');
+        btnText.innerHTML = `<img src="{% static 'assets/img/loading.gif' %}" class="loading-gif" alt="fetching...">`;
+        investButton.disabled = true;
+    
+
+        fetch(url, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken,
+            },
+            body: JSON.stringify({'investment':data})
+        })
+        .then((response)=>{
+            return response.json()
+        })
+        .then((data)=>{
+            console.log(data)
+            if (data['status'] == 'success') {
+                message.style.color = 'rgba(5, 187, 5, 0.801)';
+                message.innerText = data['message'];
+                btnText.innerHTML = `Success`;
+                setTimeout(()=>{
+                    message.innerText = 'Redirecting to invoice page..';
+                    window.location.href = data['invoice-url'];
+                }, 5000)  
+            } else {
+                message.innerText = data['message'];
+                console.log(data['error-message'])
+                btnText.innerHTML = `Purchase Now!`;
+                investButton.disabled = false;
+            }
+        })
+        .catch((err)=>{
+            console.log(err);
+            message.innerText = 'Error while placing investment. Try again later'
+            btnText.innerHTML = `Purchase Now!`;
+            investButton.disabled = false;
+        })
+    }
+
+    // This functions only allows input fields to accept only numbers
+    function onlyNumberKey(evt) {
+        // Only ASCII character in that range allowed
+        var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+        if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+        return false; 
+        return true;
+        // use  onkeypress="return onlyNumberKey(event)" on the input field
+    }
+
+    // This function to generate investment ID
+    function generateInvestmentID(){
+        let id = Math.floor(Math.random() * 1000000000 + 1);
+
+        return id
+    }
+</script>
+
+
+
+
+
+<!--                 DASHBOARD PAGE SNIPPETS              -->
+
+<script>
+    let refAddress = document.getElementById('referral-address'),
+    copyBtn = document.getElementById('copy-button');
+    
+    copyBtn.addEventListener('click', ()=> {copyText(refAddress)})
+    
+    // Function to copy affiliate link
+    function copyText(arg) {
+        console.log('clicked a button');
+        // Get the input or text field
+        //var copyText = document.getElementById("myInput");
+    
+        // Select the text field
+        arg.select();
+        arg.setSelectionRange(0, 99999); // For mobile devices
+    
+        // Copy the text inside the text field
+        navigator.clipboard.writeText(arg.value);
+    
+        // Alert the copied text
+        alert("Copied the text: " + arg.value);
+    }
+
+    // Function to generate random decimal
+    function randMinMax(text, max) {
+        return text + Math.random() * max;
+    }
+
+    // Function to generate and update random decimals at a given period of time
+    function updateEveryXms(text , max, time) {
+        document.getElementById('mining').innerHTML = '**0';
+
+        setInterval(function(){
+            // console.log(randMinMax(min, max))
+            document.getElementById('mining').innerHTML = randMinMax(text, max);
+        }, time);
+    }
+    
+    updateEveryXms('**', 10, 3000);
+</script>
+
+
+
+
+
+<!--                 INVOICE/INVESTMENT DETAIL PAGE SNIPPETS              -->
+
+<script>
+    let address = document.getElementById('address'),
+    copyButton = document.getElementById('copy-button'),
+    payBtn = document.getElementById('pay-button'),
+    confirmBtn = document.getElementById('confirm-button'),
+    message = document.getElementById('message');
+    
+    copyBtn.addEventListener('click', ()=> {copyText(address)})
+    payBtn.addEventListener('click', investFromBalance)
+    confirmBtn.addEventListener('click', confirmPayment)
+    
+    function copyText(arg) {
+        console.log('clicked a button');
+        // Get the input or text field
+        //var copyText = document.getElementById("myInput");
+    
+        // Select the text field
+        arg.select();
+        arg.setSelectionRange(0, 99999); // For mobile devices
+    
+        // Copy the text inside the text field
+        navigator.clipboard.writeText(arg.value);
+    
+        // Alert the copied text
+        alert("Copied the text: " + arg.value);
+    }
+    
+    
+    // Function to fund investment from account user's balance
+    function investFromBalance(){
+        let url = '/invest_from_balance/',
+        data = {
+            id : '{{investment.investment_id}}',
+            amount : '{{investment.amount}}',
+            action : 'pay'
+        };
+    
+        // Load animation function
+        console.log('About to invest from user balance...');
+        let btnText = payBtn.querySelector('.btn-text');
+        btnText.innerHTML = `<img src="{% static 'assets/img/loading.gif' %}" class="loading-gif" alt="fetching...">`;
+        payBtn.disabled = true;
+    
+        fetch(url, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken,
+            },
+            body: JSON.stringify({'investment':data})
+        })
+        .then((response)=>{
+            return response.json()
+        })
+        .then((data)=>{
+            console.log('data:', data)
+            if (data['status'] == 'success') {
+                message.style.color = 'rgba(5, 187, 5, 0.801)';
+                message.innerText = data['message'];
+                btnText.innerHTML = `Success`;
+                setTimeout(() => window.location.reload(), 5000);
+            } else {
+                message.style.color = 'rgba(255, 0, 0, 0.801)';
+                message.innerText = data['message'];
+                btnText.innerHTML = `Pay from balance`;
+                payBtn.disabled = false;
+            }
+        })
+        .catch((err)=>{
+            console.log(err);
+            message.style.color = 'rgba(255, 0, 0, 0.801)';
+            message.innerText = 'Error while placing investment. Try again later';
+            btnText.innerHTML = `Pay from balance`;
+            payBtn.disabled = false;
+        })
+    }
+    
+    
+    // Function to notify admins to confirm payment
+    function confirmPayment(){
+        let url = '/confirm_payment/';
+    
+        // Load animation function
+        console.log('About to invest from user balance...')
+        let btnText = confirmBtn.querySelector('.btn-text');
+        btnText.innerHTML = `<img src="{% static 'assets/img/loading.gif' %}" class="loading-gif" alt="fetching...">`;
+        confirmBtn.disabled = true;
+    
+        fetch(url, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken,
+            },
+            body: JSON.stringify({'id' : '{{investment.investment_id}}'})
+        })
+        .then((response)=>{
+            return response.json()
+        })
+        .then((data)=>{
+            console.log(data)
+            message.style.color = 'rgba(5, 187, 5, 0.801)';
+            message.innerText = data;
+            btnText.innerHTML = `Success`;
+        })
+        .catch((err)=>{
+            console.log(err);
+            message.style.color = 'rgba(255, 0, 0, 0.801)';
+            message.innerText = 'Error while confirming payment. Try again later';
+            btnText.innerHTML = `Confirm payment`;
+            confirmBtn.disabled = false;
+        })
+    }
+</script>
+    
+    
+<!--  Script to convert our utc datetime to local time datetime  -->
+<script>
+    var issueDate = new Date(`{{investment.date|date:"D, d M Y H:i:s"}} UTC`).toLocaleDateString(),
+    approvalDate = new Date('{{investment.approved_date.isoformat}}').toLocaleString(),
+    endDate = new Date('{{investment.end_date.isoformat}}').toLocaleString();
+    //timezone = '{{request.user.profile.timezone}}';
+
+    document.querySelector('.issue-date').innerText = issueDate;
+    document.querySelector('.approved-date').innerText = approvalDate;
+    document.querySelector('.end-date').innerText = endDate;
+</script>
+
+
+<!-- Script to prevent DDOS attacks(form resubmission on reload) -->
+<script>
+if (window.history.replaceState){
+    window.history.replaceState(null, null, window.location.href);
+}
+// add onunload='' to the body tag of base page  and autocomplete="off" on form tags
+</script>
+
+
+
+
+
+

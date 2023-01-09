@@ -1,0 +1,239 @@
+{% extends 'dashboardbase.html' %}
+{% load static %}
+
+{% block style %}
+<style>
+    .card-statistics, .alert {
+        border-radius: 15px;
+        box-shadow: 2px 5px 2.5px rgba(128, 128, 128, 0.3);
+    }
+    .card-body {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #fff;
+    }
+    .card-body big {
+        color: #fff;
+    }
+    .active-mining {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        color: #fff;
+    }
+    .mining-rate {
+        color: yellow;
+        font-size: small;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+    .mining {
+        color: rgba(0, 255, 0, 0.801);
+    }
+</style>
+{% endblock %}
+
+{% block title %}
+<title>Dashboard | {{company.name}}</title>
+{% endblock %}
+
+{% block pagetitle %}
+<div class="row">
+    <div class="col-md-12 m-b-30">
+        <!-- begin page title -->
+        <div class="d-block d-lg-flex flex-nowrap align-items-center">
+            <div class="page-title mr-4 pr-4 border-right">
+                <h1>Dashboard</h1>
+            </div>
+            <div class="breadcrumb-bar align-items-center">
+                <nav>
+                    <ol class="breadcrumb p-0 m-b-0">
+                        <li class="breadcrumb-item">
+                            <a href="#"><i class="ti ti-home"></i></a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            Dashboard
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <!-- end page title -->
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<!-- Notification -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="alert border-0 alert-primary bg-primary m-b-30 alert-dismissible fade show" role="alert">
+            <strong>Welcome {{request.user.fullname}}!</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <i class="ti ti-close"></i>
+            </button>
+        </div>
+    </div>
+</div>
+<!-- End Notification -->
+<!-- end row -->
+<div class="row">
+    <div class="col-md-12 m-b-30">
+        <div class="card card-statistics h-100 m-b-0 bg-secondary"> <!--#212529-->
+            <div class="card-body">
+                <span>
+                    <big class="text-uppercase d-block mt-1">Total Balance</big>
+                    <strong>${{account.total_balance}}</strong>           
+                </span>
+                <span>
+                    <i class="fas fa-wallet fa-3x text-info"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 m-b-30">
+        <div class="card card-statistics h-100 m-b-0 bg-dark">
+            <div class="card-body">
+                <span>
+                    <big class="text-uppercase d-block mt-1">Balance</big>
+                    <strong>${{account.balance}}</strong>           
+                </span>
+                <span>
+                    <i class="fa fa-th-large fa-3x text-orange"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 m-b-30">
+        <div class="card card-statistics h-100 m-b-0 bg-dark">
+            <div class="card-body">
+                <span>
+                    <big class="text-uppercase d-block mt-1">Referral balance</big>
+                    <strong>${{account.referral_balance}}</strong>           
+                </span>
+                <span>
+                    <i class="fas fa-users fa-3x text-primary"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 m-b-30">
+        <div class="card card-statistics h-100 m-b-0 bg-dark">
+            <div class="card-body">
+                <span class="active-mining">
+                    <span>
+                        <big class="text-uppercase d-block mt-1">Active Mining</big>
+                        <strong>${{account.active_investments}}</strong>
+                    </span>
+                    {% if mining %}
+                   <span class="mining-rate mining mt-10">
+                        <span><i class="fas fa-download"></i></span><span id="mining"></span>
+                   </span>
+                   {% else %}
+                    <span class="mining-rate mt-10">
+                        <span><i class="fas fa-download"></i></span><span>0</span>
+                    </span>
+                   {% endif %}
+                </span>
+                <span>
+                    <i class="fas fa-download fa-3x text-success"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-6 m-b-30">
+        <div class="card card-statistics h-100 m-b-0 bg-dark">
+            <div class="card-body">
+                <span>
+                    <big class="text-uppercase d-block mt-1">Total mining</big>
+                    <strong>${{account.total_investments}}</strong>           
+                </span>
+                <span>
+                    <i class="fas fa-server fa-3x text-cyan"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-6 m-b-30">
+        <div class="card card-statistics h-100 m-b-0 bg-dark">
+            <div class="card-body">
+                <span>
+                    <big class="text-uppercase d-block mt-1">Total withdrawal</big>
+                    <strong>${{account.completed_withdrawals}}</strong>           
+                </span>
+                <span>
+                    <i class="fas fa-hand-holding-usd fa-3x text-warning"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-6 m-b-30">
+        <div class="card card-statistics h-100 m-b-0 bg-dark">
+            <div class="card-body">
+                <span>
+                    <big class="text-uppercase d-block mt-1">Pending withdrawal</big>
+                    <strong>${{account.pending_withdrawals}}</strong>           
+                </span>
+                <span>
+                    <i class="fas fa-spinner fa-3x text-danger"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 m-b-30">
+        <div class="card card-statistics h-100 m-b-0 bg-dark">
+            <div class="card-body" style="flex-direction: column; align-items:flex-start; justify-content: space-between;">
+                <big class="text-uppercase d-block mt-1">Referral link</big>
+                <div><input type="text" id="referral-address" value="http://{{company.site_domain}}/register/{{request.user.profile.ref_code}}/"><button class="btn-sm btn-primary" id="copy-button"><i class="fas fa-paste"></i></button></div>          
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block script %}
+<script>
+    let refAddress = document.getElementById('referral-address'),
+    copyBtn = document.getElementById('copy-button');
+    
+    copyBtn.addEventListener('click', ()=> {copyText(refAddress)})
+    
+    // Function to copy affiliate link
+    function copyText(arg) {
+        console.log('clicked a button');
+        // Get the input or text field
+        //var copyText = document.getElementById("myInput");
+    
+        // Select the text field
+        arg.select();
+        arg.setSelectionRange(0, 99999); // For mobile devices
+    
+        // Copy the text inside the text field
+        navigator.clipboard.writeText(arg.value);
+    
+        // Alert the copied text
+        alert("Copied the text: " + arg.value);
+    }
+
+    // Function to generate random decimal
+    function randMinMax(text, max) {
+        return text + (Math.random() * max).toFixed(7);
+    }
+
+    // Function to generate and update random decimals at a given period of time
+    function updateEveryXms(text , max, time) {
+        document.getElementById('mining').innerHTML = '**0';
+
+        setInterval(function(){
+            // console.log(randMinMax(min, max))
+            document.getElementById('mining').innerHTML = randMinMax(text, max);
+        }, time);
+    }
+    
+    updateEveryXms('**', 10, 3000);
+</script>
+{% endblock %}

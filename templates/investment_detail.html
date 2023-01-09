@@ -1,0 +1,323 @@
+{% extends 'dashboardbase.html' %}
+{% load static %}
+
+{% block title %}
+<title>Mining detail | {{company.name}}</title>
+{% endblock %}
+
+{% block style %}
+<style>
+.payment-container {
+    display:flex; 
+    justify-content: space-between; 
+    flex-wrap: wrap;
+}
+.payment {
+    width: 35%;
+}
+.invoice {
+    width: 60%;
+}
+@media screen and (max-width: 900px) {
+    .payment, .invoice {
+        width: 100%;
+    }
+}
+.payment-status-container {
+    display:flex; 
+    justify-content: space-between; 
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
+.invoice-billing {
+    width: 100%;
+}
+.invoice-information {
+    width:100%
+}
+.invoice-item {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+}
+.invoice-item-title {
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-right: 20px;
+}
+#copy {
+    cursor: pointer;
+}
+#message {
+    color: rgba(255, 0, 0, 0.801);
+}
+</style>
+{% endblock %}
+
+{% block pagetitle %}
+<div class="row">
+    <div class="col-md-12 m-b-30">
+        <!-- begin page title -->
+        <div class="d-block d-lg-flex flex-nowrap align-items-center">
+            <div class="page-title mr-4 pr-4 border-right">
+                <h1>Mining detail</h1>
+            </div>
+            <div class="breadcrumb-bar align-items-center">
+                <nav>
+                    <ol class="breadcrumb p-0 m-b-0">
+                        <li class="breadcrumb-item">
+                            <a href="#"></a>
+                        </li>
+                        <li class="breadcrumb-item"></li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <!-- end page title -->
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<!--pricing-contant 2-start-->
+<div class="row payment-container">
+    {% if investment.status == 'pending' %}
+    <div class="payment">
+        <div class="card card-statistics mb-30">
+            <div class="card-header">
+                <div>
+                    <center>
+                        {% if investment.status == 'pending' %}
+                        <img src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl={{investment.payment_address}}&choe=UTF-8" width="200">
+                        <p>Wallet Address (<b class="u">{{investment.payment_method}}</b>)</p>
+                        <div class='input-group'>
+                            <input id='address' class='form-control bl-0' value="{{investment.payment_address}}" readonly>
+                            <div class='input-group-prepend' id="copy-button">
+                                <span class='input-group-text'>Copy address</span>
+                            </div>
+                        </div>
+                        {% elif investment.status == 'approved' %}
+                        <img src="{% static 'assets/img/approved.png' %}" width="150">
+                        {% elif investment.status == 'completed' %}
+                        <img src="{% static 'assets/img/completed.png' %}" width="150">
+                        {% elif investment.status == 'declined' %}
+                        <img src="{% static 'assets/img/declined.png' %}" width="150">
+                        {% endif %}
+                    </center>
+                </div>
+            </div>
+            <div class="card-body">
+                <h4 class="card-title">Note*</h4>
+                <p class="card-text">Click the Pay Status button if only payment have been made to the above address for verification</p>
+                <div class="payment-status-container">
+                    <div class="mr-10" style="display:flex;">
+                        <div>
+                            {% if investment.payment_method == 'BITCOIN' %}
+                            <img src="{% static 'assets/img/bitcoin.jpg' %}" alt="" width="50" style="margin-right: 10px;" />
+                            {% elif investment.payment_method == 'ETHEREUM' %}
+                            <img src="{% static 'assets/img/ethereum.jpg' %}" alt="" width="50" style="margin-right: 10px;" />
+                            {% elif investment.payment_method == 'BINANCE' %}
+                            <img src="{% static 'assets/img/binance.jpg' %}" alt="" width="50" style="margin-right: 10px;" />
+                            {% elif investment.payment_method == 'USDT-TRC20' %}
+                            <img src="{% static 'assets/img/usdt.jpg' %}" alt="" width="50" style="margin-right: 10px;" />
+                            {% elif investment.payment_method == 'USDT-ERC20' %}
+                            <img src="{% static 'assets/img/usdt.jpg' %}" alt="" width="50" style="margin-right: 10px;" />
+                            {% elif investment.payment_method == 'USDT-BEP20' %}
+                            <img src="{% static 'assets/img/usdt.jpg' %}" alt="" width="50" style="margin-right: 10px;" />
+                            {% elif investment.payment_method == 'BUSD' %}
+                            <img src="{% static 'assets/img/busd.jpg' %}" alt="" width="50" style="margin-right: 10px;" />
+                            {% elif investment.payment_method == 'TRON' %}
+                            <img src="{% static 'assets/img/tron.jpg' %}" alt="" width="50" style="margin-right: 10px;" />
+                            {% elif investment.payment_method == 'LITECOIN' %}
+                            <img src="{% static 'assets/img/litecoin.jpg' %}" alt="" width="50" style="margin-right: 10px;" />
+                            {% elif investment.payment_method == 'DASHCOIN' %}
+                            <img src="{% static 'assets/img/dash.jpg' %}" alt="" width="50" style="margin-right: 10px;" />
+                            {% elif investment.payment_method == 'BITCOIN CASH' %}
+                            <img src="{% static 'assets/img/bitcoincash.jpg' %}" alt="" width="50" style="margin-right: 10px;" />
+                            {% elif investment.payment_method == 'DOGECOIN' %}
+                            <img src="{% static 'assets/img/dogecoin.jpg' %}" alt="" width="50" style="margin-right: 10px;" />
+                            {% elif investment.payment_method == 'XRP' %}
+                            <img src="{% static 'assets/img/xrp.jpg' %}" alt="" width="50" style="margin-right: 10px;" />
+                            {% elif investment.payment_method == 'SOLANA' %}
+                            <img src="{% static 'assets/img/solana.jpg' %}" alt="" width="50" style="margin-right: 10px;" />
+                            {% elif investment.payment_method == 'CARDANO' %}
+                            <img src="{% static 'assets/img/cardano.jpg' %}" alt="" width="50" style="margin-right: 10px;" />
+                            {% endif %}
+                        </div>
+                        <div>
+                            <b class="b">{{investment.payment_method}}</b><br>${{investment.amount}}
+                        </div>
+                    </div>
+                    <div>
+                        <button class='btn btn-primary' id="confirm-button">Payment status</button>
+                    </div>
+                </div>
+                <p><button class="btn btn-primary" id="pay-button">Pay from balance</button></p><br>
+                <p id="message"></p>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    <div class="invoice">
+        <div class="card card-statistics mb-30">
+            <div class="card-header">
+                <h2><span class="u">{{company.name}}</span></h2>
+                <div>
+                    <h4>MINING DETAILS</h4>
+                    {% if investment.status == 'pending' %}
+                    <p>This payment will be confirmed as soon as the payment is received</p>
+                    {% endif %}
+                    <p>Email: {{company.email}}</p>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="invoice-billing mb-30">
+                    Billed To:<br>
+                    <b>{{investment.user.fullname}}</b><br>
+                    Email: {{investment.user.email}}
+                </div>
+                <div class="invoice-information mb-30">
+                    Invoice Information<br>
+                    <li class="invoice-item"><span class="invoice-item-title">INVOICE NUMBER</span> <span class="invoice-result">{{investment.investment_id}}</span></li>
+                    <li class="invoice-item"><span class="invoice-item-title">PACKAGE</span> <span class="invoice-result">{{investment.package.package}}</span></li>
+                    <li class="invoice-item"><span class="invoice-item-title">AMOUNT</span> <span class="invoice-result">${{investment.amount}}</span></li>
+                    <li class="invoice-item"><span class="invoice-item-title">DAILY PROFIT</span> <span class="invoice-result">${{investment.daily_profit}}</span></li>
+                    <li class="invoice-item"><span class="invoice-item-title">TOTAL PROFIT</span> <span class="invoice-result">${{investment.total_profit}}</span></li>
+                    <li class="invoice-item"><span class="invoice-item-title">TOTAL RETURNS</span> <span class="invoice-result">${{investment.roi}}</span></li>
+                    <li class="invoice-item"><span class="invoice-item-title">TOTAL CURRENT RETURNS</span> <span class="invoice-result"><b>${{investment.returns}}</b></span></li>
+                    <li class="invoice-item"><span class="invoice-item-title">ISSUE DATE</span> <span class="invoice-result issue-date">{{investment.date|date:"D, d M Y H:i:s"}}</span></li>
+                    {% if investment.approved_date %}
+                    <li class="invoice-item"><span class="invoice-item-title">APPROVED DATE</span> <span class="invoice-result approved-date"></span></li>
+                    {% endif %}
+                    {% if investment.end_date %}
+                    <li class="invoice-item"><span class="invoice-item-title">END DATE</span> <span class="invoice-result end-date"></span></li>
+                    {% endif %}
+                    <li class="invoice-item"><span class="invoice-item-title">PAYMENT METHOD</span> <span class="invoice-result">{{investment.payment_method}}</span></li>
+                    <li class="invoice-item"><span class="invoice-item-title">DURATION</span> <span class="invoice-result">{{investment.package.duration_in_days}} DAYS</span></li>
+                    {% if investment.status == 'pending' %}
+                    <li class="invoice-item"><span class="invoice-item-title">STATUS</span> <span class="invoice-result"><b class="text-warning">{{investment.get_status_display}}</b></span></li>
+                    {% elif investment.status == 'approved' %}
+                    <li class="invoice-item"><span class="invoice-item-title">STATUS</span> <span class="invoice-result"><b class="text-info">{{investment.get_status_display}}</b></span></li>
+                    {% elif investment.status == 'completed' %}
+                    <li class="invoice-item"><span class="invoice-item-title">STATUS</span> <span class="invoice-result"><b class="text-success">{{investment.get_status_display}}</b></span></li>
+                    {% endif %}
+                </div>
+                <a href="{% url 'mining:investment_pdf' investment.investment_id %}"><button class="btn btn-primary">View in PDF</button></a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--pricing-contant 2-end-->
+{% endblock %}
+
+{% block script %}
+<script>
+    let address = document.getElementById('address'),
+    copyBtn = document.getElementById('copy-button'),
+    payBtn = document.getElementById('pay-button'),
+    confirmBtn = document.getElementById('confirm-button'),
+    message = document.getElementById('message');
+    
+    copyBtn.addEventListener('click', ()=> {copyText(address)})
+    payBtn.addEventListener('click', investFromBalance)
+    confirmBtn.addEventListener('click', confirmPayment)
+    
+    function copyText(arg) {
+        console.log('clicked a button');
+        // Get the input or text field
+        //var copyText = document.getElementById("myInput");
+    
+        // Select the text field
+        arg.select();
+        arg.setSelectionRange(0, 99999); // For mobile devices
+    
+        // Copy the text inside the text field
+        navigator.clipboard.writeText(arg.value);
+    
+        // Alert the copied text
+        alert("Copied the text: " + arg.value);
+    }
+    
+    // Function to fund investment from account user's balance
+    function investFromBalance(){
+        let url = '/invest_from_balance/',
+        data = {
+            id : '{{investment.investment_id}}',
+            amount : '{{investment.amount}}',
+            action : 'pay'
+        };
+
+        // Load animation function
+
+        fetch(url, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken,
+            },
+            body: JSON.stringify({'investment':data})
+        })
+        .then((response)=>{
+            return response.json()
+        })
+        .then((data)=>{
+            console.log('data:', data)
+            if (data['status'] == 'success') {
+                message.style.color = 'rgba(5, 187, 5, 0.801)';
+                message.innerText = data['message'];
+            } else {
+                message.style.color = 'rgba(255, 0, 0, 0.801)';
+                message.innerText = data['message'];
+            }
+        })
+        .catch((err)=>{
+            console.log(err);
+            message.style.color = 'rgba(255, 0, 0, 0.801)';
+            message.innerText = 'Error while placing investment. Try again later'
+        })
+    }
+
+
+    // Function to notify admins to confirm payment
+    function confirmPayment(){
+        let url = '/confirm_payment/';
+
+        // Load animation function
+
+        fetch(url, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken,
+            },
+            body: JSON.stringify({'id' : '{{investment.investment_id}}'})
+        })
+        .then((response)=>{
+            return response.json()
+        })
+        .then((data)=>{
+            console.log(data)
+            message.style.color = 'rgba(5, 187, 5, 0.801)';
+            message.innerText = data;
+        })
+        .catch((err)=>{
+            console.log(err);
+            message.style.color = 'rgba(255, 0, 0, 0.801)';
+            message.innerText = 'Error while confirming payment. Try again later';
+        })
+    }
+</script>
+
+<!--  Script to convert our utc datetime to local time datetime  -->
+<script>
+    var issueDate = new Date(`{{investment.date|date:"D, d M Y H:i:s"}} UTC`).toLocaleDateString(),
+    approvalDate = new Date('{{investment.approved_date.isoformat}}').toLocaleString(),
+    endDate = new Date('{{investment.end_date.isoformat}}').toLocaleString();
+    //timezone = '{{request.user.profile.timezone}}';
+
+    document.querySelector('.issue-date').innerText = issueDate;
+    document.querySelector('.approved-date').innerText = approvalDate;
+    document.querySelector('.end-date').innerText = endDate;
+</script>
+{% endblock %}

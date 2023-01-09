@@ -1,0 +1,198 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from themes.potenzaglobalsolutions.com/html/mentor-bootstrap-4-admin-dashboard-template/auth-register.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 21 Jan 2021 00:35:52 GMT -->
+<head>
+    <title>Register | {{company.name}}</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Admin template that can be used to build dashboards for CRM, CMS, etc." />
+    <meta name="author" content="Potenza Global Solutions" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- app favicon -->
+    <link rel="shortcut icon" href="{% static 'assets/img/favicon.ico' %}">
+    <!-- google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <!-- plugin stylesheets -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors.css' %}" />
+    <!-- app style -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}" />
+    <style>
+        .error {
+            color: rgba(255, 0, 0, 0.808);
+        }
+        .success {
+            color: rgba(1, 170, 1, 0.801);
+        }
+        .info {
+            color: rgba(3, 51, 211, 0.705);
+        }
+        </style>
+</head>
+
+<body class="bg-white" onunload="">
+    <!-- begin app -->
+    <div class="app">
+        <!-- begin app-wrap -->
+        <div class="app-wrap">
+            <!-- begin pre-loader -->
+            <div class="loader">
+                <div class="h-100 d-flex justify-content-center">
+                    <div class="align-self-center">
+                        <img src="{% static 'assets/img/loader/loader.svg' %}" alt="loader">
+                    </div>
+                </div>
+            </div>
+            <!-- end pre-loader -->
+
+            <!--start login contant-->
+            <div class="app-contant">
+                <div class="bg-white">
+                    <div class="container-fluid p-0">
+                        <div class="row no-gutters">
+                            <div class="col-sm-6 col-lg-5 col-xxl-3  align-self-center order-2 order-sm-1">
+                                <div class="d-flex align-items-center h-100-vh">
+                                    <div class="register p-5">
+                                        <h1 class="mb-2">We are <span style="text-decoration: capitalize;">{{company.name}}</span></h1>
+                                        <p>Welcome, Please create your account.</p>
+
+                                        {% for message in messages %}
+                                        <p {% if message.tags %}class="message {{ message.tags }}"{% endif %}>{{message}}</p>
+                                        {% endfor %}
+
+                                        <form method="post" class="mt-2 mt-sm-5">
+                                            {% csrf_token %}
+                                            <div class="row">
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-group">
+                                                        <label class="control-label">First Name*</label>
+                                                        <input type="text" maxlength="25" class="form-control" name="first-name" placeholder="First Name" required/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Last Name*</label>
+                                                        <input type="text" maxlength="25" class="form-control" name="last-name" placeholder="Last Name" required/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Email*</label>
+                                                        <input type="email" maxlength="25" name="email" class="form-control" placeholder="Email" required/>
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Username*</label>
+                                                        <input type="text" maxlength="25" name="username" class="form-control" placeholder="Username" />
+                                                    </div>
+                                                </div> -->
+                                                <input type="hidden" name="location" maxlength="30" id="location" class="form-control" />
+                                                <input type="hidden" name="timezone" maxlength="30" id="timezone" class="form-control" />
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Password*</label>
+                                                        <input type="password" maxlength="20" name="password1" class="form-control" placeholder="Password" required/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Confirm Password*</label>
+                                                        <input type="password" maxlength="20" name="password2" class="form-control" placeholder="Confirm Password" required/>
+                                                    </div>
+                                                </div>
+                                                {% if upline %}
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Referred By</label>
+                                                        <input type="text" name="ref-code" class="form-control" value="{{upline}}" disabled/>
+                                                    </div>
+                                                </div>
+                                                {% else %}
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Referred By</label>
+                                                        <input type="text" name="ref-code" class="form-control" placeholder="Referred by" disabled/>
+                                                    </div>
+                                                </div>
+                                                {% endif %}
+                                                <div class="col-12 mt-3">
+                                                    <button class="btn btn-primary text-uppercase" name="register-submit">Sign up</button>
+                                                </div>
+                                                <div class="col-12  mt-3">
+                                                    <p>Already have an account ?<a href="{% url 'mining:login' %}"> Sign In</a></p>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-xxl-9 col-lg-7 bg-gradient o-hidden order-1 order-sm-2">
+                                <div class="row align-items-center h-100">
+                                    <div class="col-7 mx-auto ">
+                                        <img class="img-fluid" src="{% static 'assets/img/bg/login.svg' %}" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end app-wrap -->
+    </div>
+    <!-- end app -->
+
+
+
+    <!-- plugins -->
+    <script src="{% static 'assets/js/vendors.js' %}"></script>
+
+    <!-- custom app -->
+    <script src="{% static 'assets/js/app.js' %}"></script>
+
+    <!-- Script for getting user location from longitude and latitude -->
+    <script>
+        let handleResults = (position) => {
+            let {latitude, longitude} = position.coords;
+
+            fetch(`https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=870f0570505b4d4498b7b1d220992532`)
+            .then(response => response.json())
+            .then((data) => {
+                let country =  data.results[0].components.country,
+                state = data.results[0].components.state,
+                userLocation = `${state}`;
+                console.log(userLocation);
+                document.getElementById('location').value = userLocation;
+                localStorage.setItem('location', userLocation);
+            })
+
+        }
+
+        let userlocation = localStorage.getItem('location');
+
+        if (userlocation == null) {
+            // if there is no location in local storage then fetch and set one
+            navigator.geolocation.getCurrentPosition(handleResults, console.log)
+        } else {
+            // else just set our input value
+            console.log(userlocation);
+            document.getElementById('location').value = userlocation;
+        }
+        
+    </script>
+
+    <!-- Script for getting user timezone -->
+    <script>
+        // Timezone settings
+        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone; // e.g. "America/New_York"
+        document.getElementById('timezone').value = timezone;
+        // console.log(document.getElementById('timezone').value);
+    </script>
+</body>
+
+
+<!-- Mirrored from themes.potenzaglobalsolutions.com/html/mentor-bootstrap-4-admin-dashboard-template/auth-register.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 21 Jan 2021 00:35:52 GMT -->
+</html>

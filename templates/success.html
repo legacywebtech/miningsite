@@ -1,0 +1,50 @@
+{% extends 'dashboardbase.html' %}
+{% load static %}
+
+{% block title %}
+<title>Success | {{company.name}}</title>
+{% endblock %}
+
+{% block style %}
+<style>
+    .success-container {
+        margin: 20px;
+    }
+</style>
+{% endblock %}
+
+{% block pagetitle %}
+<div class="row">
+    <div class="col-md-12 m-b-30">
+        <!-- begin page title -->
+        <div class="d-block d-lg-flex flex-nowrap align-items-center">
+            <div class="page-title mr-4 pr-4 border-right">
+                <h1>Password Change Succesful</h1>
+            </div>
+            <!-- <div class="breadcrumb-bar align-items-center">
+                <nav>
+                    <ol class="breadcrumb p-0 m-b-0">
+                        <li class="breadcrumb-item">
+                        </li>
+                        <li class="breadcrumb-item">
+                        </li>
+                    </ol>
+                </nav>
+            </div> -->
+        </div>
+        <!-- end page title -->
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="col-12">
+    <div class="mt-20">
+        <h2>Password change was successful</h2>
+        <div class="mt-30 mb-30">
+            <img src="{% static 'assets/img/success.png' %}" width="300">
+        </div>
+        <a href="{% url 'mining:account' %}"><button class="btn btn-primary">Go back to dashboard</button></a>
+    </div>
+</div>
+{% endblock %}
